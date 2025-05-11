@@ -2,12 +2,6 @@
 
 This project implements a solution for the [11785 HW2P2 Face Verification Spring 2025](https://www.kaggle.com/competitions/11785-hw-2-p-2-face-verification-spring-2025). The solution ranked 22 / 301, achieving an EER of 0.02747 on the test dataset.
 
-## Project Highlights
-
-- Leveraged embeddings learned during face classification to perform face verification.
-- Implemented an enhanced MobileFaceNet architecture with channel attention mechanism for efficient face recognition.
-- Enhanced the feature separability through a hybrid loss function combining cross-entropy and Arcface loss.
-
 ## Project Overview
 
 The project address two related but distinct tasks: face classification and face verification.
@@ -15,6 +9,12 @@ The project address two related but distinct tasks: face classification and face
 - Face Classifier: trains a model to identify the person in the image from a set of known identities by extracting discriminative feature vectors from face images.
 
 - Face Verification: determines whether two faces belong to the same person by measuring the similarity between feature vectors, even if the person was not in the training dataset.
+
+## Project Highlights
+
+- Leveraged embeddings learned during face classification to perform face verification.
+- Implemented an enhanced MobileFaceNet architecture with channel attention mechanism for efficient face recognition.
+- Enhanced the feature separability through a hybrid loss function combining cross-entropy and Arcface loss.
 
 ## Dataset
 
@@ -61,6 +61,22 @@ The project implements a hybrid loss function combining:
 
 - ArcFace Loss (weight 1.5): improves feature discrimination by adding an angular margin between feature vectors. It Transforms the standard softmax function $s_j = z_i \cdot w_j = \|z_i\| \|w_j\| \cos \theta_j$ (where $θ_j$ is the angle between the feature vector $z_i$ and the weight vector $w_j$) by introducing an angular margin $m$ to $\theta_j$.
 
+## Evaluation Metric
+
+Face Classification is evaluated with accuracy:
+
+- Accuracy = # of correctly classified images / total images
+
+Face Verification is evaluated using the Equal Error Rate (EER). The EER is the point at which the rate of false acceptances (False Acceptance Rate, FAR) equals the rate of false rejections (False Rejection Rate, FRR). These rates are defined as follows:
+
+- FAR = # of false acceptances / total # of impostor attempts
+- FRR = # of false rejections / total # of genuine attempts
+
+The EER is the value where these two rates are equal, indicating the threshold at which
+the system’s error rates are balanced. A lower EER indicates better performance.
+
+- EER = FAR = FRR
+
 ## Model Performance
 
 The model achieved excellent performance across evaluation metrics:
@@ -68,8 +84,6 @@ The model achieved excellent performance across evaluation metrics:
 - Accuracy on validation dataset: 98.3%
 - EER on validation dataset: 0.02240
 - EER on test dataset: 0.02747
-
-EER (Equal Error Rate) represents the point where false acceptance rate equals false rejection rate, with lower values indicating better performance.
 
 ## Installation
 
